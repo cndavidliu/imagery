@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" monitorInterval="30">
+	<Properties>
+		<Property name="ENCODING">UTF-8</Property>
+	</Properties>
+	<Appenders>
+    	<RollingFile name="main" 
+					 fileName="/opt/logs/${project.build.finalName}/${project.build.finalName}.log" 
+    				 filePattern="/opt/logs/${project.build.finalName}/${project.build.finalName}.log.%d{yyyy-MM-dd}">
+      		<PatternLayout>
+          		<Pattern>%d %p [%c][%t] - %m%n</Pattern>
+          		<Charset>${ENCODING}</Charset>
+        	</PatternLayout>
+        	<Policies>
+          		<TimeBasedTriggeringPolicy />
+        	</Policies>
+    	</RollingFile>
+    	<Async name="async_main">
+			<AppenderRef ref="main"/>
+	    </Async>
+  	</Appenders>
+  	
+  	<Loggers>
+    	<Root level="info" includeLocation="false">
+        	<AppenderRef ref="async_main"/>
+    	</Root>
+	</Loggers>
+</Configuration>
